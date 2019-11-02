@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ufwb version="1.17">
+    <grammar name="Loxone Statistic Binary File" start="id:772" author="ddeml">
+        <description>Grammar for Loxone Statistic Binary File</description>
+        <structure name="LoxStat" id="772" alignment="0" encoding="UTF-8" endian="little" signed="no">
+            <number name="ValueCount" id="773" type="integer" length="2"/>
+            <number name="MagicNumber" id="774" type="integer" length="2" display="hex"/>
+            <number name="Unknown" id="775" type="integer" length="4" display="binary"/>
+            <number name="TextLength" id="776" type="integer" length="4"/>
+            <string name="Text" id="777" type="fixed-length" length="TextLength"/>
+            <structure name="DataPoint" id="778" length="0" alignment="16" repeatmin="0" repeatmax="-1" encoding="UTF-8">
+                <number name="SourceID" id="779" type="integer" length="4" endian="little" display="hex"/>
+                <number name="Timestamp" id="780" type="integer" length="4" endian="little"/>
+                <structure name="Values" id="781" length="0" alignment="0" repeat="id:773" repeatmin="0" repeatmax="-1">
+                    <number name="Value" id="782" type="float" length="8" endian="little"/>
+                </structure>
+            </structure>
+        </structure>
+    </grammar>
+</ufwb>
