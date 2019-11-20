@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace LoxStatEdit
 {
-    public class LoxStatFile: LoxStatObject
+    public class LoxStatFile : LoxStatObject
     {
         /// <summary>The original Loxone file name. Contains UUID and datecode of the statfile. 
         /// </summary>
@@ -90,7 +91,7 @@ namespace LoxStatEdit
             );
             return value;
         }
-        
+
         /// <summary>Finds problems in that file
         /// </summary>
         /// <param name="collection"></param>
@@ -98,20 +99,20 @@ namespace LoxStatEdit
         {
             try
             {
-                if(Guid == Guid.Empty)
+                if (Guid == Guid.Empty)
                     AddProblem(collection, "File name is not a Guid");
-                if(YearMonth == DateTime.MinValue)
+                if (YearMonth == DateTime.MinValue)
                     AddProblem(collection, "File name extension is not a year/month");
-                if((ValueCount < 1) || (ValueCount > 2))
+                if (ValueCount < 1)
                     AddProblem(collection, "Unexpected number of values per data point.");
                 //Intentionally not checking Unknown bytes
-                if(TextLength == 0)
+                if (TextLength == 0)
                     AddProblem(collection, "Unexpected text length");
                 //Intentionally not checking Padding
-                foreach(var dataPoint in DataPoints)
+                foreach (var dataPoint in DataPoints)
                     dataPoint.AddProblems(collection);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 AddProblem(collection, ex);
             }
@@ -123,15 +124,17 @@ namespace LoxStatEdit
             {
                 return Path.GetFileName(FileName);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return ex.ToString();
             }
         }
 
-        public static int GetPaddingLength(int offset)
+        public int GetPaddingLength(int offset)
         {
-            return (16 - (offset % 16)) % 16;
+            var pageWidth = 8 + ValueCount * 8 + (ValueCount > 1 ? 8 : 0);
+
+            return (pageWidth - (offset % pageWidth)) % pageWidth;
         }
 
         public static LoxStatFile Load(string fileName, bool headerOnly = false)
@@ -140,7 +143,7 @@ namespace LoxStatEdit
             loxStatFile.FileName = fileName;
             try
             {
-                using(var reader = new BinaryReader(File.Open(fileName, FileMode.Open)))
+                using (var reader = new BinaryReader(File.Open(fileName, FileMode.Open)))
                 {
                     loxStatFile.ValueCount = reader.ReadUInt16();
                     loxStatFile.Unknown0x02 = reader.ReadUInt16();
@@ -149,14 +152,15 @@ namespace LoxStatEdit
                     loxStatFile.TextBytes = reader.ReadBytes(loxStatFile.TextLength);
                     loxStatFile.TextTerminator = reader.ReadByte();
                     loxStatFile.Padding = reader.ReadBytes(
-                        GetPaddingLength(13 + loxStatFile.TextLength));
+                        loxStatFile.GetPaddingLength(13 + loxStatFile.TextLength));
+
                     var dataPoints = new List<LoxStatDataPoint>();
                     loxStatFile.DataPoints = dataPoints;
-                    if(!headerOnly)
+                    if (!headerOnly)
                         LoxStatDataPoint.FromBinaryReader(loxStatFile, reader);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 loxStatFile.LoadException = ex;
             }
@@ -165,7 +169,7 @@ namespace LoxStatEdit
 
         public void Save()
         {
-            using(var writer = new BinaryWriter(File.Open(FileName, FileMode.Create)))
+            using (var writer = new BinaryWriter(File.Open(FileName, FileMode.Create)))
             {
                 writer.Write(ValueCount);
                 writer.Write(Unknown0x02);
@@ -174,8 +178,8 @@ namespace LoxStatEdit
                 writer.Write(TextBytes);
                 writer.Write(TextTerminator);
                 writer.Write(Padding);
-                if(DataPoints != null)
-                    foreach(var dataPoint in DataPoints)
+                if (DataPoints != null)
+                    foreach (var dataPoint in DataPoints)
                         dataPoint.Save(writer);
             }
         }
