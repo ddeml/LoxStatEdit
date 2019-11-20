@@ -4,7 +4,7 @@ using System.IO;
 
 namespace LoxStatEdit
 {
-    public class LoxStatDataPoint: LoxStatObject
+    public class LoxStatDataPoint : LoxStatObject
     {
         public static readonly DateTime TimestampBias = new DateTime(2009, 1, 1);
 
@@ -46,47 +46,57 @@ namespace LoxStatEdit
         {
             try
             {
-                if(LoxStatFile == null)
+                if (LoxStatFile == null)
                 {
                     AddProblem(collection, "Data point does not belong to a LoxStatFile");
                     return;
                 }
                 bool isLastDataPoint = false;
                 var dataPoints = LoxStatFile.DataPoints;
-                if(dataPoints != null)
+                if (dataPoints != null)
                 {
                     isLastDataPoint = dataPoints.Count == (Index + 1);
-                    if((Index < 0) || (Index >= dataPoints.Count) ||
+                    if ((Index < 0) || (Index >= dataPoints.Count) ||
                         (dataPoints[Index] != this))
                         AddProblem(collection, "Invalid data point index");
-                    else if((Index > 0) &&
+                    else if ((Index > 0) &&
                         (dataPoints[Index - 1].TimestampOffset > TimestampOffset))
                         AddProblem(collection, "Timestamp order mismatch");
                 }
                 var guid = LoxStatFile.Guid;
-                if(guid != Guid.Empty)
+                if (guid != Guid.Empty)
                 {
                     var guidBytes = guid.ToByteArray();
-                    if((BitConverter.ToUInt16(guidBytes, 6) != ObjectUidPart1) ||
+                    if ((BitConverter.ToUInt16(guidBytes, 6) != ObjectUidPart1) ||
                         (BitConverter.ToUInt16(guidBytes, 4) != ObjectUidPart2))
                         AddProblem(collection, "Uid part mismatch");
                 }
                 var yearMonth = LoxStatFile.YearMonth;
-                if(yearMonth != DateTime.MinValue)
+                if (yearMonth != DateTime.MinValue)
                 {
                     //It may happen that the last data point has a
                     //Timestamp in the next month
                     //Probably to for interpolation?
                     var timestamp = Timestamp;
-                    if((timestamp < yearMonth) ||
+                    if ((timestamp < yearMonth) ||
                         (timestamp >= yearMonth.AddMonths(isLastDataPoint ? 2 : 1)))
                         AddProblem(collection, "Timestamp not within year/month of StatFile");
                 }
-                if((Values == null) || (Values.Length != LoxStatFile.ValueCount))
+                if ((Values == null) || (Values.Length != LoxStatFile.ValueCount))
                     AddProblem(collection, "Value count mismatch");
+
+                if (Values != null)
+                {
+                    foreach (var value in Values)
+                    {
+                        if (Double.IsInfinity(value) || Double.IsNaN(value))
+                            AddProblem(collection, "Infinity or NaN value detected");
+                    }
+                }
+
                 //Intentionally not checking Padding
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 AddProblem(collection, ex);
             }
@@ -98,7 +108,7 @@ namespace LoxStatEdit
             {
                 return string.Format("{0}[{1}]", LoxStatFile, Index);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return ex.ToString();
             }
@@ -109,10 +119,10 @@ namespace LoxStatEdit
             var list = loxStatFile.DataPoints;
             var valueCount = loxStatFile.ValueCount;
             int index = 0;
-            while(true)
+            while (true)
             {
                 var bytes = reader.ReadBytes(4);
-                if(bytes.Length == 0) return; //End of file
+                if (bytes.Length == 0) return; //End of file
                 var dataPoint = new LoxStatDataPoint
                 {
                     LoxStatFile = loxStatFile,
@@ -123,10 +133,10 @@ namespace LoxStatEdit
                 dataPoint.ObjectUidPart2 = BitConverter.ToUInt16(bytes, 2);
                 dataPoint.TimestampOffset = reader.ReadUInt32();
                 dataPoint.Values = new double[valueCount];
-                for(int i = 0; i < valueCount; i++)
+                for (int i = 0; i < valueCount; i++)
                     dataPoint.Values[i] = reader.ReadDouble();
                 dataPoint.Padding = reader.ReadBytes(
-                    LoxStatFile.GetPaddingLength(8 + valueCount * 8));
+                    loxStatFile.GetPaddingLength(8 + valueCount * 8));
             }
         }
 
@@ -135,7 +145,7 @@ namespace LoxStatEdit
             writer.Write(ObjectUidPart1);
             writer.Write(ObjectUidPart2);
             writer.Write(TimestampOffset);
-            foreach(var value in Values)
+            foreach (var value in Values)
                 writer.Write(value);
             writer.Write(Padding);
         }
