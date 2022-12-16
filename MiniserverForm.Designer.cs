@@ -54,18 +54,20 @@
             // 
             // urlLabel
             // 
-            urlLabel.Location = new System.Drawing.Point(12, 17);
+            urlLabel.Location = new System.Drawing.Point(18, 26);
+            urlLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             urlLabel.Name = "urlLabel";
-            urlLabel.Size = new System.Drawing.Size(82, 18);
+            urlLabel.Size = new System.Drawing.Size(123, 28);
             urlLabel.TabIndex = 0;
             urlLabel.Text = "Miniserver:";
             // 
             // refreshFolderButton
             // 
             refreshFolderButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            refreshFolderButton.Location = new System.Drawing.Point(576, 38);
+            refreshFolderButton.Location = new System.Drawing.Point(1127, 58);
+            refreshFolderButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             refreshFolderButton.Name = "refreshFolderButton";
-            refreshFolderButton.Size = new System.Drawing.Size(75, 23);
+            refreshFolderButton.Size = new System.Drawing.Size(112, 35);
             refreshFolderButton.TabIndex = 5;
             refreshFolderButton.Text = "Refresh FS";
             refreshFolderButton.UseVisualStyleBackColor = true;
@@ -74,9 +76,10 @@
             // refreshMsButton
             // 
             refreshMsButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            refreshMsButton.Location = new System.Drawing.Point(576, 12);
+            refreshMsButton.Location = new System.Drawing.Point(1127, 18);
+            refreshMsButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             refreshMsButton.Name = "refreshMsButton";
-            refreshMsButton.Size = new System.Drawing.Size(75, 23);
+            refreshMsButton.Size = new System.Drawing.Size(112, 35);
             refreshMsButton.TabIndex = 2;
             refreshMsButton.Text = "Refresh MS";
             refreshMsButton.UseVisualStyleBackColor = true;
@@ -84,18 +87,20 @@
             // 
             // folderLabel
             // 
-            folderLabel.Location = new System.Drawing.Point(12, 43);
+            folderLabel.Location = new System.Drawing.Point(18, 66);
+            folderLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             folderLabel.Name = "folderLabel";
-            folderLabel.Size = new System.Drawing.Size(82, 18);
+            folderLabel.Size = new System.Drawing.Size(123, 28);
             folderLabel.TabIndex = 3;
             folderLabel.Text = "Working Folder:";
             // 
             // downloadButton
             // 
             downloadButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            downloadButton.Location = new System.Drawing.Point(540, 287);
+            downloadButton.Location = new System.Drawing.Point(1073, 1092);
+            downloadButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             downloadButton.Name = "downloadButton";
-            downloadButton.Size = new System.Drawing.Size(111, 23);
+            downloadButton.Size = new System.Drawing.Size(166, 35);
             downloadButton.TabIndex = 7;
             downloadButton.Text = "Download selected";
             downloadButton.UseVisualStyleBackColor = true;
@@ -105,9 +110,10 @@
             // 
             this._urlTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this._urlTextBox.Location = new System.Drawing.Point(100, 14);
+            this._urlTextBox.Location = new System.Drawing.Point(150, 22);
+            this._urlTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this._urlTextBox.Name = "_urlTextBox";
-            this._urlTextBox.Size = new System.Drawing.Size(470, 20);
+            this._urlTextBox.Size = new System.Drawing.Size(966, 26);
             this._urlTextBox.TabIndex = 1;
             this._urlTextBox.Text = "ftp://admin:admin@miniserver:21";
             // 
@@ -115,9 +121,10 @@
             // 
             this._folderTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this._folderTextBox.Location = new System.Drawing.Point(100, 40);
+            this._folderTextBox.Location = new System.Drawing.Point(150, 62);
+            this._folderTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this._folderTextBox.Name = "_folderTextBox";
-            this._folderTextBox.Size = new System.Drawing.Size(470, 20);
+            this._folderTextBox.Size = new System.Drawing.Size(966, 26);
             this._folderTextBox.TabIndex = 4;
             // 
             // _dataGridView
@@ -135,10 +142,12 @@
             this._editCol,
             this._downloadCol,
             this._uploadCol});
-            this._dataGridView.Location = new System.Drawing.Point(12, 67);
+            this._dataGridView.Location = new System.Drawing.Point(18, 103);
+            this._dataGridView.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this._dataGridView.Name = "_dataGridView";
+            this._dataGridView.RowHeadersWidth = 62;
             this._dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this._dataGridView.Size = new System.Drawing.Size(639, 214);
+            this._dataGridView.Size = new System.Drawing.Size(1221, 979);
             this._dataGridView.TabIndex = 6;
             this._dataGridView.VirtualMode = true;
             this._dataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridView_CellContentClick);
@@ -148,6 +157,7 @@
             // 
             this._nameCol.DataPropertyName = "Name";
             this._nameCol.HeaderText = "Name";
+            this._nameCol.MinimumWidth = 8;
             this._nameCol.Name = "_nameCol";
             this._nameCol.ReadOnly = true;
             this._nameCol.Width = 235;
@@ -158,6 +168,7 @@
             dataGridViewCellStyle1.Format = "yyyy-MM";
             this._yearMonthCol.DefaultCellStyle = dataGridViewCellStyle1;
             this._yearMonthCol.HeaderText = "Year/Month";
+            this._yearMonthCol.MinimumWidth = 8;
             this._yearMonthCol.Name = "_yearMonthCol";
             this._yearMonthCol.ReadOnly = true;
             this._yearMonthCol.Width = 71;
@@ -166,12 +177,15 @@
             // 
             this._statusCol.DataPropertyName = "Status";
             this._statusCol.HeaderText = "Status";
+            this._statusCol.MinimumWidth = 8;
             this._statusCol.Name = "_statusCol";
             this._statusCol.ReadOnly = true;
+            this._statusCol.Width = 150;
             // 
             // _editCol
             // 
             this._editCol.HeaderText = "Edit";
+            this._editCol.MinimumWidth = 8;
             this._editCol.Name = "_editCol";
             this._editCol.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this._editCol.Text = "Edit";
@@ -180,6 +194,7 @@
             // _downloadCol
             // 
             this._downloadCol.HeaderText = "Download";
+            this._downloadCol.MinimumWidth = 8;
             this._downloadCol.Name = "_downloadCol";
             this._downloadCol.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this._downloadCol.Text = "Download";
@@ -188,6 +203,7 @@
             // _uploadCol
             // 
             this._uploadCol.HeaderText = "Upload";
+            this._uploadCol.MinimumWidth = 8;
             this._uploadCol.Name = "_uploadCol";
             this._uploadCol.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this._uploadCol.Text = "Upload";
@@ -195,9 +211,9 @@
             // 
             // MiniserverForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(663, 322);
+            this.ClientSize = new System.Drawing.Size(1257, 1145);
             this.Controls.Add(downloadButton);
             this.Controls.Add(this._dataGridView);
             this.Controls.Add(this._folderTextBox);
@@ -207,6 +223,7 @@
             this.Controls.Add(this._urlTextBox);
             this.Controls.Add(refreshFolderButton);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "MiniserverForm";
             this.Text = "Loxone Miniserver Browser";
             this.Load += new System.EventHandler(this.MiniserverForm_Load);

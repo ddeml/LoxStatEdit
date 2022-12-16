@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace LoxStatEdit
 {
@@ -37,13 +39,43 @@ namespace LoxStatEdit
                 columns.Add(newColumn);
             }
             _dataGridView.RowCount = _loxStatFile.DataPoints.Count;
+            _dataGridView.MultiSelect = true;
+
             RefreshProblems();
+            RefreshChart();
         }
 
         private void RefreshProblems()
         {
             _problems = LoxStatProblem.GetProblems(_loxStatFile);
             _problemButton.Enabled = _problems.Any();
+        }
+
+        private void RefreshChart()
+        {
+            // Now we can set up the Chart:
+            List<Color> colors = new List<Color> { Color.Green, Color.Red, Color.Black, Color.Blue, Color.Violet, Color.Turquoise, Color.YellowGreen };
+
+            _chart.Series.Clear();
+
+            int skipHeaderColumns = 2;
+
+            for (int i = skipHeaderColumns; i < _dataGridView.Columns.Count; i++)
+            {
+                Series S = _chart.Series.Add(_dataGridView.Columns[i].HeaderText);
+                S.ChartType = SeriesChartType.Spline;
+                S.Color = colors[i];
+            }
+
+
+            // and fill in all the values from the dgv to the chart:
+            for (int i = 0; i < _dataGridView.Rows.Count; i++)
+            {
+                for (int j = 0; j < _chart.Series.Count; j++)
+                {
+                    int p = _chart.Series[j].Points.AddXY(_dataGridView[1, i].Value, _dataGridView[j+ skipHeaderColumns, i].Value);
+                }
+            }
         }
 
         private void ShowProblems()
@@ -103,6 +135,7 @@ namespace LoxStatEdit
                 dataPoint.Values[columnIndex - _valueColumnOffset] =
                     Convert.ToDouble(e.Value.ToString());
             RefreshProblems();
+            RefreshChart();
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -141,5 +174,37 @@ namespace LoxStatEdit
             ShowProblems();
         }
 
+        private void _dataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void _dataGridView_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control && e.KeyCode == Keys.V)
+            {
+
+                string CopiedContent = Clipboard.GetText();
+                string[] Lines = CopiedContent.Split('\n');
+                int StartingRow = _dataGridView.CurrentCell.RowIndex;
+                int StartingColumn = _dataGridView.CurrentCell.ColumnIndex;
+                foreach (var line in Lines)
+                {
+                    if (StartingRow <= (_dataGridView.Rows.Count - 1))
+                    {
+                        string[] cells = line.Split('\t');
+                        int ColumnIndex = StartingColumn;
+                        for (int i = 0; i < cells.Length && ColumnIndex <= (_dataGridView.Columns.Count - 1); i++)
+                        {
+                            if (!String.IsNullOrEmpty(cells[i]))
+                            {
+                                _dataGridView[ColumnIndex++, StartingRow].Value = cells[i];
+                            }
+                        }
+                        StartingRow++;
+                    }
+                }
+            }
+        }
     }
 }
