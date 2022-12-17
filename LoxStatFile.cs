@@ -45,13 +45,28 @@ namespace LoxStatEdit
             get
             {
                 Guid value;
-                Guid.TryParseExact
-                (
-                    Path.GetFileNameWithoutExtension(FileName).
-                        Replace("-", ""),
-                    "N",
-                    out value
-                );
+                if (Path.GetFileNameWithoutExtension(FileName).Contains('_'))
+                {
+                    Guid.TryParseExact
+                    (
+                       Path.GetFileNameWithoutExtension(FileName).Split('_')[0].
+                           Replace("-", ""),
+                       "N",
+                       out value
+                    );
+                }
+                else
+                {
+                    Guid.TryParseExact
+                    (
+                       Path.GetFileNameWithoutExtension(FileName).
+                           Replace("-", ""),
+                       "N",
+                       out value
+                    );
+                }
+               
+               
                 return value;
             }
         }
