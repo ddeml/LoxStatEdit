@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
+  <asmv1:assemblyIdentity name="LoxStatEdit.exe" version="1.0.0.0" publicKeyToken="23fa58694a4acf6a" language="neutral" processorArchitecture="msil" type="win32" />
+  <description asmv2:iconFile="favicon.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
+  <application />
+  <entryPoint>
+    <assemblyIdentity name="LoxStatEdit" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+    <commandLine file="LoxStatEdit.exe" parameters="" />
+  </entryPoint>
+  <trustInfo>
+    <security>
+      <applicationRequestMinimum>
+        <PermissionSet Unrestricted="true" ID="Custom" SameSite="site" />
+        <defaultAssemblyRequest permissionSetReference="Custom" />
+      </applicationRequestMinimum>
+      <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
+        <!--
+          UAC Manifest Options
+          If you want to change the Windows User Account Control level replace the
+          requestedExecutionLevel node with one of the following.
+
+        <requestedExecutionLevel  level="asInvoker" uiAccess="false" />
+        <requestedExecutionLevel  level="requireAdministrator" uiAccess="false" />
+        <requestedExecutionLevel  level="highestAvailable" uiAccess="false" />
+
+         If you want to utilize File and Registry Virtualization for backward
+         compatibility then delete the requestedExecutionLevel node.
+    -->
+        <requestedExecutionLevel level="asInvoker" uiAccess="false" />
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+  <dependency>
+    <dependentOS>
+      <osVersionInfo>
+        <os majorVersion="5" minorVersion="1" buildNumber="2600" servicePackMajor="0" />
+      </osVersionInfo>
+    </dependentOS>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Microsoft.Windows.CommonLanguageRuntime" version="4.0.30319.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="LoxStatEdit.exe" size="1149400">
+      <assemblyIdentity name="LoxStatEdit" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>A5aiJZufid9Xjhd8IaFnqZJmq6HXPD0FHSxAgd922gc=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <file name="favicon.ico" size="370070">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>hPvVYVfHokLVNxgcwn1vWV7mJZ33HI1PQGefgGC9DBA=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="LoxStatEdit.exe.config" size="184">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>FihlZtVNgcNyH37Pf0Jtll3jZOm+L55ijXNjtoS2/mo=</dsig:DigestValue>
+    </hash>
+  </file>
+<publisherIdentity name="CN=AzureAD\ManuelKirsch" issuerKeyHash="d8b7efa6bd6b4ffc5ad5a681a79db8ddcf5dc3f2" /><Signature Id="StrongNameSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>jTUJNjWF202+Ab3yMVkZFwm1CwknPB3e0ocgpeB5hHk=</DigestValue></Reference></SignedInfo><SignatureValue>u/Rt5Y9CHhAq2Sfu2BB05j+wCZVapUohykEQUXZVUulyaDYoNnY11nm/xtJ6g+rsCPOLsOAFu2nFQ1JIn0Z1fS+gzGfb5x6Zj/jnOJMmfL4Lngp0o5ixBaG3pSsh1S1ESiTBgi1HdFbEZxEL23C0EvdESNnBety0cDE85Q+V7/0=</SignatureValue><KeyInfo Id="StrongNameKeyInfo"><KeyValue><RSAKeyValue><Modulus>w2bEh2H4ZKmvlUaJrlhj+PMt15H+Jb0sch/N3cCZxPBdoPZ1odFEev76yb+4rUsQ7JnwcxOmQc3ZxmThEgSLU/MGE+Qr8qwRfqi2dW/0a3c1f+tovjjKMJ7kdVGJIVUlrQKZsXXlnJoGWLL6wG6EqVkjZJiK6/zSB6ZwR1KlaX0=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><msrel:RelData xmlns:msrel="http://schemas.microsoft.com/windows/rel/2005/reldata"><r:license xmlns:r="urn:mpeg:mpeg21:2003:01-REL-R-NS" xmlns:as="http://schemas.microsoft.com/windows/pki/2005/Authenticode"><r:grant><as:ManifestInformation Hash="798479e0a52087d2de1d3c27090bb50917195931f2bd01be4ddb85353609358d" Description="" Url=""><as:assemblyIdentity name="LoxStatEdit.exe" version="1.0.0.0" publicKeyToken="23fa58694a4acf6a" language="neutral" processorArchitecture="msil" type="win32" /></as:ManifestInformation><as:SignedBy /><as:AuthenticodePublisher><as:X509SubjectName>CN=AzureAD\ManuelKirsch</as:X509SubjectName></as:AuthenticodePublisher></r:grant><r:issuer><Signature Id="AuthenticodeSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>rxLnRAta9i6z9MRTqL0m6j8WhzdYA1GJs3qAsOdXH3Q=</DigestValue></Reference></SignedInfo><SignatureValue>cyLsTskfrMA7xn/d8DUWwCqRT6ChQKW5qc0eFNx8KO6fUpd9LgYoepfF9vkVOcTICZUxUeinJMbfA8nYj45pucDzcMI21UoQUJs8iFAb8gL1oarCI/PfVxMEJQw8uDUc0rKd0XbDr6RNKb2iL5pl8fDoQpELJmCrvZUSxRBbm6E=</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>w2bEh2H4ZKmvlUaJrlhj+PMt15H+Jb0sch/N3cCZxPBdoPZ1odFEev76yb+4rUsQ7JnwcxOmQc3ZxmThEgSLU/MGE+Qr8qwRfqi2dW/0a3c1f+tovjjKMJ7kdVGJIVUlrQKZsXXlnJoGWLL6wG6EqVkjZJiK6/zSB6ZwR1KlaX0=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIIB6TCCAVKgAwIBAgIQGPQyhOMQD7dMex2fC68bxzANBgkqhkiG9w0BAQsFADAzMTEwLwYDVQQDHigAQQB6AHUAcgBlAEEARABcAE0AYQBuAHUAZQBsAEsAaQByAHMAYwBoMB4XDTIyMTIxNjIxMTUxMloXDTIzMTIxNzAzMTUxMlowMzExMC8GA1UEAx4oAEEAegB1AHIAZQBBAEQAXABNAGEAbgB1AGUAbABLAGkAcgBzAGMAaDCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAw2bEh2H4ZKmvlUaJrlhj+PMt15H+Jb0sch/N3cCZxPBdoPZ1odFEev76yb+4rUsQ7JnwcxOmQc3ZxmThEgSLU/MGE+Qr8qwRfqi2dW/0a3c1f+tovjjKMJ7kdVGJIVUlrQKZsXXlnJoGWLL6wG6EqVkjZJiK6/zSB6ZwR1KlaX0CAwEAATANBgkqhkiG9w0BAQsFAAOBgQCtwif5zkmLyqrlKdVyWdcl40WCyYYCtBNOpssDEJrGpoB0M3vFfqmW74nJOGuGCfEsSPkCR3tLvVkbxZsxL8+gmmVsfai7sKCLZ+FA/gqsa+5sphkAPbQusR9EYLJOLLnf40QjMoGr6EW/MJu7cKn13mvQgHBejuJZElfiHk5hYQ==</X509Certificate></X509Data></KeyInfo></Signature></r:issuer></r:license></msrel:RelData></KeyInfo></Signature></asmv1:assembly>
