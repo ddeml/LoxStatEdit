@@ -54,7 +54,7 @@ namespace LoxStatEdit
         private void RefreshChart()
         {
             // Now we can set up the Chart:
-            List<Color> colors = new List<Color> { Color.Green, Color.Red, Color.Black, Color.Blue, Color.Violet, Color.Turquoise, Color.YellowGreen };
+            List<Color> colors = new List<Color> { Color.Green, Color.Red, Color.Black, Color.Blue, Color.Violet, Color.Turquoise, Color.YellowGreen, Color.AliceBlue, Color.Beige, Color.Chocolate, Color.CornflowerBlue, Color.Firebrick };
 
             _chart.Series.Clear();
 
@@ -198,12 +198,17 @@ namespace LoxStatEdit
                         {
                             if (!String.IsNullOrEmpty(cells[i]))
                             {
-                                _dataGridView[ColumnIndex++, StartingRow].Value = cells[i];
+                                var columnIndex = ColumnIndex++;
+                                var dataPoint = _loxStatFile.DataPoints[StartingRow];
+                                dataPoint.Values[columnIndex - _valueColumnOffset] = Convert.ToDouble(cells[i].ToString());
                             }
                         }
                         StartingRow++;
                     }
                 }
+                RefreshProblems();
+                RefreshChart();
+                _dataGridView.Refresh();
             }
         }
     }
